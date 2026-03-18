@@ -42,6 +42,11 @@ npm run dev
 # Приложение откроется на http://localhost:3000
 ```
 
+### Деплой на Vercel (фронт + API)
+- В корне репозитория: папка `api/` (serverless) и `vercel.json` (сборка из `client/`, rewrites для SPA).
+- Подключите репозиторий к Vercel, Root Directory оставьте корнем. В настройках проекта добавьте переменную окружения: `VITE_API_BASE_URL` = `https://ваш-проект.vercel.app/api` (подставьте реальный URL после первого деплоя).
+- Локально по-прежнему: `server/` + `client/` с `VITE_API_BASE_URL=http://localhost:8000/api`.
+
 ---
 
 ## 🏗️ Архитектурные Решения
@@ -125,9 +130,11 @@ useEffect(() => {
 
 ```
 high-performance-table/
+├── api/
+│   └── subscribers.js     # Serverless-функция для деплоя на Vercel
 ├── server/
-│   ├── index.js   
-|   ├── package-lock.json   # Mock API с генератором данных
+│   ├── index.js            # Mock API для локальной разработки
+│   ├── package-lock.json
 │   └── package.json
 ├── client/
 │   ├── src/
@@ -141,6 +148,7 @@ high-performance-table/
 │   │   │   └── index.ts
 │   │   └── App.tsx
 │   └── package.json
+├── vercel.json             # Сборка client, rewrites для SPA
 └── README.md
 ```
 

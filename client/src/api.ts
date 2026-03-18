@@ -11,7 +11,7 @@ export const fetchSubscribers = async (
     signal?: GenericAbortSignal
 ): Promise<ApiResponse<Subscriber>> => {
     try {
-        const params = { page, limit };
+        const params: { page: number; limit: number; tariff?: string; status?: string } = { page, limit };
         if (tariff != null && tariff !== '') params.tariff = tariff;
         if (status != null && status !== '') params.status = status;
         console.log('[status] api.fetchSubscribers: params =', params);
